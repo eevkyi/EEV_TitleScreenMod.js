@@ -29,12 +29,22 @@ const EEV_Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandW
 Window_TitleCommand.prototype.makeCommandList = function() {
     EEV_Window_TitleCommand_makeCommandList.call(this);
 
+    this.addCommand("Test Link", "testLink");
+
     this.addCommand("Quit", "quitGame");
 };
 
 Scene_Title.prototype.createCommandWindow = function() {
     EEV_Scene_Title_createCommandWindow.call(this);
 
-    this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
+    this._commandWindow.setHandler("testLink", () => {
+        setTimeout(() => {
+            nw.Shell.openExternal("https://github.com/eevkyi");
 
+        }, 100);
+
+        this._commandWindow.activate();
+    });
+
+    this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
 };
