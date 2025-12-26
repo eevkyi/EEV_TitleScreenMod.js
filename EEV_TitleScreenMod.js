@@ -22,3 +22,19 @@
  * Releases:
  * - https://github.com/eevkyi/EEV_TitleScreenMod.js
  */
+
+const EEV_Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
+const EEV_Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
+
+Window_TitleCommand.prototype.makeCommandList = function() {
+    EEV_Window_TitleCommand_makeCommandList.call(this);
+
+    this.addCommand("Quit", "quitGame");
+};
+
+Scene_Title.prototype.createCommandWindow = function() {
+    EEV_Scene_Title_createCommandWindow.call(this);
+
+    this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
+
+};
