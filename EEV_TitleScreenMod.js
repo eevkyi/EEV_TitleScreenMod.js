@@ -25,6 +25,7 @@
 
 const EEV_Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
 const EEV_Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
+const EEV_Scene_Title_create = Scene_Title.prototype.create;
 
 Window_TitleCommand.prototype.makeCommandList = function() {
     EEV_Window_TitleCommand_makeCommandList.call(this);
@@ -80,4 +81,16 @@ Scene_Title.prototype.commandWindowRect = function() {
 
     return new Rectangle(x, y, width, height);
 
+};
+
+Scene_Title.prototype.create = function() {
+    EEV_Scene_Title_create.call(this);
+
+    const bitmap = new Bitmap(400, 96);
+    const sprite = new Sprite(bitmap);
+    sprite.bitmap.fontSize = 72;
+    sprite.bitmap.drawText("Test Text", 0, 0, 400, 96, "center");
+    sprite.x = 200;
+    sprite.y = 200;
+    this.addChild(sprite);
 };
