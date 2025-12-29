@@ -34,6 +34,10 @@ Window_TitleCommand.prototype.makeCommandList = function() {
     this.addCommand("Quit", "quitGame");
 };
 
+Window_TitleCommand.prototype.itemTextAlign = function() {
+    return "center";
+};
+
 Scene_Title.prototype.createCommandWindow = function() {
     EEV_Scene_Title_createCommandWindow.call(this);
 
@@ -47,4 +51,33 @@ Scene_Title.prototype.createCommandWindow = function() {
     });
 
     this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
+
+    // A hack to display the menu consistently, without empty spaces, in both MV and MZ.
+    // Offset values will be fixed later.
+    const offsetY = 0;
+    this._commandWindow.height = this._commandWindow.fittingHeight(Math.min(this._commandWindow.maxItems(), 10));
+    this._commandWindow.y = Graphics.boxHeight - this._commandWindow.height - (Graphics.boxHeight * 0.1) + offsetY;
+
+    if (Utils.RPGMAKER_NAME !== "MZ") {
+        const offsetX = 0;
+        this._commandWindow.width = 300;
+        this._commandWindow.x = (Graphics.boxWidth - this._commandWindow.width) / 2 + offsetX;
+
+        this._commandWindow.refresh();
+        this._commandWindow.updateCursor();
+    }
+};
+
+Scene_Title.prototype.commandWindowRect = function() {
+
+    const offsetX = $dataSystem.titleCommandWindow.offsetX;
+    const offsetY = $dataSystem.titleCommandWindow.offsetY;
+    const width = 300;
+    const x = (Graphics.boxWidth - width) / 2 + offsetX;
+
+    const height = this.calcWindowHeight(10, true);
+    const y = Graphics.boxHeight - height - (Graphics.boxHeight * 0.1) + offsetY;
+
+    return new Rectangle(x, y, width, height);
+
 };
