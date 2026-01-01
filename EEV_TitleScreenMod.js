@@ -21,11 +21,70 @@
  * ----------------------------------------------------------------------------
  * Releases:
  * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text Custom Text
+ */
+
+/*~struct~CustomText:
+ * @param text
+ * @text Text
+ * @type string
+ * @desc The text that will be drawn.
+ * @default Test Text
+ *
+ * @param fontSize
+ * @text Font Size
+ * @type number
+ * @desc The size of the font.
+ * @default 72
+ *
+ * @param maxWidth
+ * @text Max Width
+ * @type number
+ * @desc The maximum allowed width of the text.
+ * @default 400
+ *
+ * @param lineHeight
+ * @text Line Height
+ * @type number
+ * @desc The height of the text line.
+ * @default 96
+ *
+ * @param align
+ * @text Align
+ * @type select
+ * @option Center
+ * @value center
+ * @option Right
+ * @value right
+ * @option Left
+ * @value left
+ * @desc The alignment of the text.
+ * @default center
+ *
+ * @param x
+ * @text X Coordinate
+ * @type number
+ * @desc The x coordinate for the left of the text.
+ * @default 200
+ *
+ * @param y
+ * @text Y Coordinate
+ * @type number
+ * @desc The y coordinate for the top of the text.
+ * @default 200
  */
 
 const EEV_Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
 const EEV_Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
 const EEV_Scene_Title_create = Scene_Title.prototype.create;
+const EEV_Plugin_Parameters = PluginManager.parameters("EEV_TitleScreenMod");
+
+var EEV = EEV || {};
+EEV.CustomText = JSON.parse(EEV_Plugin_Parameters.CustomTextList || "[]");
+
 
 Window_TitleCommand.prototype.makeCommandList = function() {
     EEV_Window_TitleCommand_makeCommandList.call(this);
@@ -86,11 +145,24 @@ Scene_Title.prototype.commandWindowRect = function() {
 Scene_Title.prototype.create = function() {
     EEV_Scene_Title_create.call(this);
 
-    const bitmap = new Bitmap(400, 96);
-    const sprite = new Sprite(bitmap);
-    sprite.bitmap.fontSize = 72;
-    sprite.bitmap.drawText("Test Text", 0, 0, 400, 96, "center");
-    sprite.x = 200;
-    sprite.y = 200;
-    this.addChild(sprite);
+    EEV.CustomText.forEach(item => {
+        const settings = JSON.parse(item);
+
+        const text = settings.text ?? "Test Text";
+        const fontSize = settings.fontSize ?? 72;
+        const maxWidth = settings.maxWidth ?? 400;
+        const lineHeight = settings.lineHeight ?? 96;
+        const align = settings.align ?? "center";
+        const x = settings.x ?? 200;
+        const y = settings.y ?? 200;
+
+        const bitmap = new Bitmap(maxWidth, lineHeight);
+        const sprite = new Sprite(bitmap);
+        sprite.bitmap.fontSize = fontSize;
+        sprite.bitmap.drawText(text, 0, 0, maxWidth, lineHeight, align);
+        sprite.x = x;
+        sprite.y = y;
+
+        this.addChild(sprite);
+    });
 };
