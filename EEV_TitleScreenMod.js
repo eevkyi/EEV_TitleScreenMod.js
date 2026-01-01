@@ -114,14 +114,16 @@ Scene_Title.prototype.createCommandWindow = function() {
 
     // Needed for compatibility.
     if (Utils.RPGMAKER_NAME === "MV") {
-        this._commandWindow.width = 300;
-        this._commandWindow.height = this._commandWindow.fittingHeight(Math.min(this._commandWindow.maxItems(), 10));
-        const offsetX = 0;
-        const offsetY = 0;
+        const relativeWidth = 30;
+        this._commandWindow.width = Graphics.boxWidth * relativeWidth / 100;
+        const visibleRows = 10;
+        this._commandWindow.height = this._commandWindow.fittingHeight(Math.min(this._commandWindow.maxItems(), visibleRows));
+        const relativeOffsetX = 0;
+        const relativeOffsetY = 0;
         const defaultX = (Graphics.boxWidth - this._commandWindow.width) / 2;
         const defaultY = (Graphics.boxHeight - this._commandWindow.height) / 2;
-        this._commandWindow.x = defaultX + offsetX;
-        this._commandWindow.y = defaultY + offsetY;
+        this._commandWindow.x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
+        this._commandWindow.y = defaultY + (Graphics.boxHeight * relativeOffsetY / 100);
 
         this._commandWindow.refresh();
         this._commandWindow.updateCursor();
@@ -129,19 +131,20 @@ Scene_Title.prototype.createCommandWindow = function() {
 };
 
 Scene_Title.prototype.commandWindowRect = function() {
-    const width = 300;
+    const width = Graphics.boxWidth * 30 / 100;
 
     // Hack to remove empty spaces.
     const menu = new Window_TitleCommand(new Rectangle(0, 0, width, 1));
-    const rows = Math.min(menu.maxItems(), 10);
+    const visibleRows = 10;
+    const rows = Math.min(menu.maxItems(), visibleRows);
     const height = this.calcWindowHeight(rows, true);
 
-    const offsetX = 0;
-    const offsetY = 0;
+    const relativeOffsetX = 0;
+    const relativeOffsetY = 0;
     const defaultX = (Graphics.boxWidth - width) / 2;
     const defaultY = (Graphics.boxHeight - height) / 2;
-    const x = defaultX + offsetX;
-    const y = defaultY + offsetY;
+    const x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
+    const y = defaultY + (Graphics.boxHeight * relativeOffsetY / 100);
 
     return new Rectangle(x, y, width, height);
 };
