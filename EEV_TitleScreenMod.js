@@ -1302,6 +1302,169 @@
  * @default 終了
  */
 
+/*:ko
+ * @target MV MZ
+ *
+ * @plugindesc 타이틀 화면 수정 기능.
+ * [v0.0.0] [MIT 라이선스] [MV 및 MZ 호환]
+ *
+ * @author eevkyi 및 기여자
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * 사용자 정의 텍스트와 링크는 해당 매개변수를
+ * 더블 클릭하여 목록에 새 항목을 추가함으로써 설정할 수 있습니다.
+ * 메뉴 설정 역시 매개변수를 더블 클릭하여 조정할 수 있습니다.
+ *
+ * 사용 편의성과 테스트를 위해 기본값이 미리 설정되어 있습니다.
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0:
+ * - [화면] 사용자 정의 이미지.
+ * - [화면] 사용자 정의 텍스트에 대한 추가 설정.
+ * - [메뉴] 추가 설정 및 사용자 정의 옵션.
+ *
+ * 변경 로그:
+ * [v0.1.0]
+ * - [화면] 크기, 최대 너비, 줄 높이, 정렬 및 위치를
+ * 사용자 정의할 수 있는 여러 사용자 정의 텍스트.
+ * - [메뉴] 텍스트를 사용자 정의할 수 있는 여러 외부 링크.
+ * - [메뉴] 너비(상대값), 표시 행 수, 정렬 및
+ * 위치(상대값) 설정 가능.
+ * - [메뉴] 텍스트를 사용자 정의할 수 있는 종료 옵션
+ * (NW.js 전용).
+ *
+ * ----------------------------------------------------------------------------
+ * 릴리스:
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text 사용자 정의 텍스트
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text 링크
+ *
+ * @param TitleMenuSettings
+ * @text 메뉴 설정
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"종료"}
+ */
+
+/*~struct~CustomText:ko
+ * @param text
+ * @text 텍스트
+ * @type string
+ * @desc 화면에 표시될 텍스트입니다.
+ * @default 테스트 텍스트
+ *
+ * @param fontSize
+ * @text 글꼴 크기
+ * @type number
+ * @desc 글꼴의 크기입니다.
+ * @default 72
+ *
+ * @param maxWidth
+ * @text 최대 너비
+ * @type number
+ * @desc 텍스트의 최대 허용 너비입니다.
+ * @default 400
+ *
+ * @param lineHeight
+ * @text 줄 높이
+ * @type number
+ * @desc 텍스트 줄의 높이입니다.
+ * @default 96
+ *
+ * @param align
+ * @text 정렬
+ * @type select
+ * @option 가운데
+ * @value center
+ * @option 오른쪽
+ * @value right
+ * @option 왼쪽
+ * @value left
+ * @desc 텍스트의 정렬 방식입니다.
+ * @default center
+ *
+ * @param x
+ * @text X 좌표
+ * @type number
+ * @desc 텍스트 왼쪽 기준의 X 좌표입니다.
+ * @default 200
+ *
+ * @param y
+ * @text Y 좌표
+ * @type number
+ * @desc 텍스트 상단 기준의 Y 좌표입니다.
+ * @default 200
+ */
+
+/*~struct~Link:ko
+ * @param label
+ * @text 메뉴 텍스트
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:ko
+ * @param relativeWidth
+ * @text 상대 너비
+ * @type number
+ * @desc 창 너비 비율을 기준으로 한 메뉴의 상대 너비입니다.
+ * @default 30
+ *
+ * @param visibleRows
+ * @text 표시 행 수
+ * @type number
+ * @desc 메뉴에 표시될 행의 수입니다.
+ * @default 10
+ *
+ * @param align
+ * @text 정렬
+ * @type select
+ * @option 가운데
+ * @value center
+ * @option 오른쪽
+ * @value right
+ * @option 왼쪽
+ * @value left
+ * @desc 메뉴 항목의 정렬 방식입니다.
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text 상대 X 오프셋
+ * @type number
+ * @desc 창 너비 비율을 기준으로 한 메뉴의 X 방향 오프셋입니다.
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text 상대 Y 오프셋
+ * @type number
+ * @desc 창 높이 비율을 기준으로 한 메뉴의 Y 방향 오프셋입니다.
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text 종료 활성화
+ * @type boolean
+ * @desc 종료 옵션을 활성화합니다.
+ * @default true
+ *
+ * @param quitLabel
+ * @text 종료 라벨
+ * @type string
+ * @desc 종료 옵션에 표시될 텍스트입니다.
+ * @default 종료
+ */
+
 (() => {
     'use strict';
 
