@@ -649,6 +649,169 @@
  * @default Esci
  */
 
+/*:fr
+ * @target MV MZ
+ *
+ * @plugindesc Modifications de l’écran titre.
+ * [v0.0.0] [Licence MIT] [Compatible avec MV et MZ]
+ *
+ * @author eevkyi et contributeurs
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * Des textes personnalisés et des liens peuvent être ajoutés en double-cliquant
+ * sur le paramètre correspondant et en ajoutant un nouvel élément à la liste.
+ * Les paramètres du menu peuvent également être ajustés en double-cliquant
+ * sur leur paramètre.
+ *
+ * Des valeurs prédéfinies ont été incluses afin de faciliter l’utilisation et les tests.
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0 :
+ * - [Écran] Images personnalisées.
+ * - [Écran] Paramètres supplémentaires pour le texte personnalisé.
+ * - [Menu] Paramètres supplémentaires et option personnalisée.
+ *
+ * JOURNAL DES MODIFICATIONS :
+ * [v0.1.0]
+ * - [Écran] Plusieurs textes personnalisés avec taille, largeur maximale,
+ * hauteur de ligne, alignement et position personnalisables.
+ * - [Menu] Plusieurs liens externes avec texte personnalisable.
+ * - [Menu] Largeur personnalisable (relative), lignes visibles, alignement et
+ * position (relative).
+ * - [Menu] Option quitter avec texte personnalisable (NW.js uniquement).
+ *
+ * ----------------------------------------------------------------------------
+ * Versions :
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text Texte Personnalisé
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text Liens
+ *
+ * @param TitleMenuSettings
+ * @text Paramètres du Menu
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"Quitter"}
+ */
+
+/*~struct~CustomText:fr
+ * @param text
+ * @text Texte
+ * @type string
+ * @desc Le texte qui sera affiché.
+ * @default Texte de Test
+ *
+ * @param fontSize
+ * @text Taille de la Police
+ * @type number
+ * @desc La taille de la police.
+ * @default 72
+ *
+ * @param maxWidth
+ * @text Largeur Maximale
+ * @type number
+ * @desc La largeur maximale autorisée du texte.
+ * @default 400
+ *
+ * @param lineHeight
+ * @text Hauteur de Ligne
+ * @type number
+ * @desc La hauteur de la ligne de texte.
+ * @default 96
+ *
+ * @param align
+ * @text Alignement
+ * @type select
+ * @option Centre
+ * @value center
+ * @option Droite
+ * @value right
+ * @option Gauche
+ * @value left
+ * @desc L’alignement du texte.
+ * @default center
+ *
+ * @param x
+ * @text Coordonnée X
+ * @type number
+ * @desc La coordonnée X du côté gauche du texte.
+ * @default 200
+ *
+ * @param y
+ * @text Coordonnée Y
+ * @type number
+ * @desc La coordonnée Y du haut du texte.
+ * @default 200
+ */
+
+/*~struct~Link:fr
+ * @param label
+ * @text Texte du Menu
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:fr
+ * @param relativeWidth
+ * @text Largeur Relative
+ * @type number
+ * @desc La largeur relative du menu, basée sur le pourcentage de la largeur de la fenêtre.
+ * @default 30
+ *
+ * @param visibleRows
+ * @text Lignes Visibles
+ * @type number
+ * @desc Le nombre de lignes visibles dans le menu.
+ * @default 10
+ *
+ * @param align
+ * @text Alignement
+ * @type select
+ * @option Centre
+ * @value center
+ * @option Droite
+ * @value right
+ * @option Gauche
+ * @value left
+ * @desc L’alignement des éléments du menu.
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text Décalage Relatif X
+ * @type number
+ * @desc Le décalage relatif en X du menu, basé sur le pourcentage de la largeur de la fenêtre.
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text Décalage Relatif Y
+ * @type number
+ * @desc Le décalage relatif en Y du menu, basé sur le pourcentage de la hauteur de la fenêtre.
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text Quitter Activé
+ * @type boolean
+ * @desc Activer l’option quitter.
+ * @default true
+ *
+ * @param quitLabel
+ * @text Libellé Quitter
+ * @type string
+ * @desc Texte de l’option quitter.
+ * @default Quitter
+ */
+
 (() => {
     'use strict';
 
