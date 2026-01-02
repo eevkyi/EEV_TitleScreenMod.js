@@ -26,6 +26,10 @@
  * @type struct<CustomText>[]
  * @text Custom Text
  *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text Links
+ *
  * @param TitleMenuSettings
  * @text Menu Settings
  * @type struct<MenuSettings>
@@ -80,6 +84,18 @@
  * @type number
  * @desc The y coordinate for the top of the text.
  * @default 200
+ */
+
+/*~struct~Link:
+ * @param label
+ * @text Menu Text
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
  */
 
 /*~struct~MenuSettings:
@@ -139,13 +155,18 @@ const EEV_Plugin_Parameters = PluginManager.parameters("EEV_TitleScreenMod");
 
 var EEV = EEV || {};
 EEV.CustomText = JSON.parse(EEV_Plugin_Parameters.CustomTextList || "[]");
+EEV.Links = JSON.parse(EEV_Plugin_Parameters.LinkList || "[]");
 EEV.MenuSettings = JSON.parse(EEV_Plugin_Parameters.TitleMenuSettings || "{}");
 
 
 Window_TitleCommand.prototype.makeCommandList = function() {
     EEV_Window_TitleCommand_makeCommandList.call(this);
 
-    this.addCommand("Test Link", "testLink");
+    EEV.Links.forEach((item, index) => {
+        const attributes = JSON.parse(item);
+
+        this.addCommand(attributes.label, `link_${index}`);
+    });
 
     if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
         this.addCommand(`${EEV.MenuSettings.quitLabel}`, "quitGame");
@@ -159,14 +180,24 @@ Window_TitleCommand.prototype.itemTextAlign = function() {
 Scene_Title.prototype.createCommandWindow = function() {
     EEV_Scene_Title_createCommandWindow.call(this);
 
-    this._commandWindow.setHandler("testLink", () => {
-        setTimeout(() => {
-            nw.Shell.openExternal("https://github.com/eevkyi");
+    EEV.Links.forEach((item, index) => {
+        const { url } = JSON.parse(item);
 
-        }, 100);
+        this._commandWindow.setHandler(`link_${index}`, () => {
+            const openLink = () => {
+                if (Utils.isNwjs()) {
+                    nw.Shell.openExternal(url);
 
-        this._commandWindow.activate();
+                } else {
+                    window.open(url, "_blank");
+                }
+            };
+
+            setTimeout(openLink, 100);
+            this._commandWindow.activate();
+        });
     });
+
 
     if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
         this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
