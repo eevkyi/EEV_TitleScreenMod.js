@@ -812,6 +812,170 @@
  * @default Quitter
  */
 
+/*:de
+ * @target MV MZ
+ *
+ * @plugindesc Änderungen am Titelbildschirm.
+ * [v0.0.0] [MIT-Lizenz] [Kompatibel mit MV und MZ]
+ *
+ * @author eevkyi und Mitwirkende
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * Benutzerdefinierte Texte und Links können hinzugefügt werden, indem man
+ * auf den entsprechenden Parameter doppelklickt und ein neues Element zur
+ * Liste hinzufügt. Die Menüeinstellungen können ebenfalls angepasst werden,
+ * indem man auf den jeweiligen Parameter doppelklickt.
+ *
+ * Vordefinierte Werte wurden zur Erleichterung der Nutzung und zum Testen
+ * hinzugefügt.
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0:
+ * - [Bildschirm] Benutzerdefinierte Bilder.
+ * - [Bildschirm] Zusätzliche Einstellungen für benutzerdefinierten Text.
+ * - [Menü] Zusätzliche Einstellungen und benutzerdefinierte Option.
+ *
+ * ÄNDERUNGSPROTOKOLL:
+ * [v0.1.0]
+ * - [Bildschirm] Mehrere benutzerdefinierte Texte mit anpassbarer Größe,
+ * maximaler Breite, Zeilenhöhe, Ausrichtung und Position.
+ * - [Menü] Mehrere externe Links mit anpassbarem Text.
+ * - [Menü] Anpassbare Breite (relativ), sichtbare Zeilen, Ausrichtung und
+ * Position (relativ).
+ * - [Menü] Beenden-Option mit anpassbarem Text (nur NW.js).
+ *
+ * ----------------------------------------------------------------------------
+ * Veröffentlichungen:
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text Benutzerdefinierter Text
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text Links
+ *
+ * @param TitleMenuSettings
+ * @text Menüeinstellungen
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"Beenden"}
+ */
+
+/*~struct~CustomText:de
+ * @param text
+ * @text Text
+ * @type string
+ * @desc Der Text, der angezeigt wird.
+ * @default Testtext
+ *
+ * @param fontSize
+ * @text Schriftgröße
+ * @type number
+ * @desc Die Größe der Schrift.
+ * @default 72
+ *
+ * @param maxWidth
+ * @text Maximale Breite
+ * @type number
+ * @desc Die maximal erlaubte Breite des Textes.
+ * @default 400
+ *
+ * @param lineHeight
+ * @text Zeilenhöhe
+ * @type number
+ * @desc Die Höhe der Textzeile.
+ * @default 96
+ *
+ * @param align
+ * @text Ausrichtung
+ * @type select
+ * @option Zentriert
+ * @value center
+ * @option Rechts
+ * @value right
+ * @option Links
+ * @value left
+ * @desc Die Ausrichtung des Textes.
+ * @default center
+ *
+ * @param x
+ * @text X-Koordinate
+ * @type number
+ * @desc Die X-Koordinate für die linke Seite des Textes.
+ * @default 200
+ *
+ * @param y
+ * @text Y-Koordinate
+ * @type number
+ * @desc Die Y-Koordinate für die obere Seite des Textes.
+ * @default 200
+ */
+
+/*~struct~Link:de
+ * @param label
+ * @text Menütext
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:de
+ * @param relativeWidth
+ * @text Relative Breite
+ * @type number
+ * @desc Die relative Breite des Menüs, basierend auf dem Prozentsatz der Fensterbreite.
+ * @default 30
+ *
+ * @param visibleRows
+ * @text Sichtbare Zeilen
+ * @type number
+ * @desc Die Anzahl der sichtbaren Zeilen im Menü.
+ * @default 10
+ *
+ * @param align
+ * @text Ausrichtung
+ * @type select
+ * @option Zentriert
+ * @value center
+ * @option Rechts
+ * @value right
+ * @option Links
+ * @value left
+ * @desc Die Ausrichtung der Menüelemente.
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text Relativer X-Versatz
+ * @type number
+ * @desc Der relative X-Versatz des Menüs, basierend auf dem Prozentsatz der Fensterbreite.
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text Relativer Y-Versatz
+ * @type number
+ * @desc Der relative Y-Versatz des Menüs, basierend auf dem Prozentsatz der Fensterhöhe.
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text Beenden Aktiviert
+ * @type boolean
+ * @desc Aktiviert die Beenden-Option.
+ * @default true
+ *
+ * @param quitLabel
+ * @text Beenden-Beschriftung
+ * @type string
+ * @desc Text der Beenden-Option.
+ * @default Beenden
+ */
+
 (() => {
     'use strict';
 
