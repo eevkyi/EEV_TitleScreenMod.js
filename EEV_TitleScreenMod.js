@@ -976,6 +976,169 @@
  * @default Beenden
  */
 
+/*:ru
+ * @target MV MZ
+ *
+ * @plugindesc Изменения экрана заголовка.
+ * [v0.0.0] [Лицензия MIT] [Совместимо с MV и MZ]
+ *
+ * @author eevkyi и участники
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * Пользовательский текст и ссылки можно добавить, дважды щёлкнув
+ * по соответствующему параметру и добавив новый элемент в список.
+ * Настройки меню также можно изменить, дважды щёлкнув по их параметру.
+ *
+ * Для удобства использования и тестирования были добавлены
+ * предустановленные значения.
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0:
+ * - [Экран] Пользовательские изображения.
+ * - [Экран] Дополнительные настройки для пользовательского текста.
+ * - [Меню] Дополнительные настройки и пользовательская опция.
+ *
+ * ЖУРНАЛ ИЗМЕНЕНИЙ:
+ * [v0.1.0]
+ * - [Экран] Несколько пользовательских текстов с настраиваемым размером,
+ * максимальной шириной, высотой строки, выравниванием и позицией.
+ * - [Меню] Несколько внешних ссылок с настраиваемым текстом.
+ * - [Меню] Настраиваемая ширина (относительная), видимые строки, выравнивание и
+ * позиция (относительная).
+ * - [Меню] Опция выхода с настраиваемым текстом (только NW.js).
+ *
+ * ----------------------------------------------------------------------------
+ * Релизы:
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text Пользовательский текст
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text Ссылки
+ *
+ * @param TitleMenuSettings
+ * @text Настройки меню
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"Выход"}
+ */
+
+/*~struct~CustomText:ru
+ * @param text
+ * @text Текст
+ * @type string
+ * @desc Текст, который будет отображён.
+ * @default Тестовый текст
+ *
+ * @param fontSize
+ * @text Размер шрифта
+ * @type number
+ * @desc Размер шрифта.
+ * @default 72
+ *
+ * @param maxWidth
+ * @text Максимальная ширина
+ * @type number
+ * @desc Максимально допустимая ширина текста.
+ * @default 400
+ *
+ * @param lineHeight
+ * @text Высота строки
+ * @type number
+ * @desc Высота строки текста.
+ * @default 96
+ *
+ * @param align
+ * @text Выравнивание
+ * @type select
+ * @option По центру
+ * @value center
+ * @option Справа
+ * @value right
+ * @option Слева
+ * @value left
+ * @desc Выравнивание текста.
+ * @default center
+ *
+ * @param x
+ * @text Координата X
+ * @type number
+ * @desc Координата X для левой стороны текста.
+ * @default 200
+ *
+ * @param y
+ * @text Координата Y
+ * @type number
+ * @desc Координата Y для верхней части текста.
+ * @default 200
+ */
+
+/*~struct~Link:ru
+ * @param label
+ * @text Текст меню
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:ru
+ * @param relativeWidth
+ * @text Относительная ширина
+ * @type number
+ * @desc Относительная ширина меню, основанная на проценте ширины окна.
+ * @default 30
+ *
+ * @param visibleRows
+ * @text Видимые строки
+ * @type number
+ * @desc Количество видимых строк в меню.
+ * @default 10
+ *
+ * @param align
+ * @text Выравнивание
+ * @type select
+ * @option По центру
+ * @value center
+ * @option Справа
+ * @value right
+ * @option Слева
+ * @value left
+ * @desc Выравнивание элементов меню.
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text Относительное смещение X
+ * @type number
+ * @desc Относительное смещение по X меню, основанное на проценте ширины окна.
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text Относительное смещение Y
+ * @type number
+ * @desc Относительное смещение по Y меню, основанное на проценте высоты окна.
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text Выход включён
+ * @type boolean
+ * @desc Включить опцию выхода.
+ * @default true
+ *
+ * @param quitLabel
+ * @text Метка выхода
+ * @type string
+ * @desc Текст опции выхода.
+ * @default Выход
+ */
+
 (() => {
     'use strict';
 
