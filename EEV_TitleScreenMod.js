@@ -25,6 +25,11 @@
  * @param CustomTextList
  * @type struct<CustomText>[]
  * @text Custom Text
+ *
+ * @param TitleMenuSettings
+ * @text Menu Settings
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"Quit"}
  */
 
 /*~struct~CustomText:
@@ -77,6 +82,56 @@
  * @default 200
  */
 
+/*~struct~MenuSettings:
+ * @param relativeWidth
+ * @text Relative Width
+ * @type number
+ * @desc The relative width of the menu, based on window width percentage.
+ * @default 30
+ *
+ * @param visibleRows
+ * @text Visible Rows
+ * @type number
+ * @desc The number of visible rows in the menu.
+ * @default 10
+ *
+ * @param align
+ * @text Align
+ * @type select
+ * @option Center
+ * @value center
+ * @option Right
+ * @value right
+ * @option Left
+ * @value left
+ * @desc The alignment of the menu items.
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text Relative X Coordinate Offset
+ * @type number
+ * @desc The relative x coordinate offset of the menu, based on window width percentage.
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text Relative Y Coordinate Offset
+ * @type number
+ * @desc The relative y coordinate offset of the menu, based on window height percentage.
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text Quit Enabled
+ * @type boolean
+ * @desc Enable quit option.
+ * @default true
+ *
+ * @param quitLabel
+ * @text Quit Label
+ * @type string
+ * @desc Quit option text.
+ * @default Quit
+ */
+
 const EEV_Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
 const EEV_Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
 const EEV_Scene_Title_create = Scene_Title.prototype.create;
@@ -84,6 +139,7 @@ const EEV_Plugin_Parameters = PluginManager.parameters("EEV_TitleScreenMod");
 
 var EEV = EEV || {};
 EEV.CustomText = JSON.parse(EEV_Plugin_Parameters.CustomTextList || "[]");
+EEV.MenuSettings = JSON.parse(EEV_Plugin_Parameters.TitleMenuSettings || "{}");
 
 
 Window_TitleCommand.prototype.makeCommandList = function() {
@@ -91,11 +147,13 @@ Window_TitleCommand.prototype.makeCommandList = function() {
 
     this.addCommand("Test Link", "testLink");
 
-    this.addCommand("Quit", "quitGame");
+    if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
+        this.addCommand(`${EEV.MenuSettings.quitLabel}`, "quitGame");
+    }
 };
 
 Window_TitleCommand.prototype.itemTextAlign = function() {
-    return "center";
+    return `${EEV.MenuSettings.align}`;
 };
 
 Scene_Title.prototype.createCommandWindow = function() {
@@ -110,16 +168,18 @@ Scene_Title.prototype.createCommandWindow = function() {
         this._commandWindow.activate();
     });
 
-    this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
+    if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
+        this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
+    }
 
     // Needed for compatibility.
     if (Utils.RPGMAKER_NAME === "MV") {
-        const relativeWidth = 30;
+        const relativeWidth = EEV.MenuSettings.relativeWidth ?? 30;
         this._commandWindow.width = Graphics.boxWidth * relativeWidth / 100;
-        const visibleRows = 10;
+        const visibleRows = EEV.MenuSettings.visibleRows ?? 10;
         this._commandWindow.height = this._commandWindow.fittingHeight(Math.min(this._commandWindow.maxItems(), visibleRows));
-        const relativeOffsetX = 0;
-        const relativeOffsetY = 0;
+        const relativeOffsetX = EEV.MenuSettings.relativeOffsetX ?? 0;
+        const relativeOffsetY = EEV.MenuSettings.relativeOffsetY ?? 0;
         const defaultX = (Graphics.boxWidth - this._commandWindow.width) / 2;
         const defaultY = (Graphics.boxHeight - this._commandWindow.height) / 2;
         this._commandWindow.x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
@@ -131,16 +191,17 @@ Scene_Title.prototype.createCommandWindow = function() {
 };
 
 Scene_Title.prototype.commandWindowRect = function() {
-    const width = Graphics.boxWidth * 30 / 100;
+    const relativeWidth = EEV.MenuSettings.relativeWidth ?? 30;
+    const width = Graphics.boxWidth * relativeWidth / 100;
 
     // Hack to remove empty spaces.
     const menu = new Window_TitleCommand(new Rectangle(0, 0, width, 1));
-    const visibleRows = 10;
+    const visibleRows = EEV.MenuSettings.visibleRows ?? 10;
     const rows = Math.min(menu.maxItems(), visibleRows);
     const height = this.calcWindowHeight(rows, true);
 
-    const relativeOffsetX = 0;
-    const relativeOffsetY = 0;
+    const relativeOffsetX = EEV.MenuSettings.relativeOffsetX ?? 0;
+    const relativeOffsetY = EEV.MenuSettings.relativeOffsetY ?? 0;
     const defaultX = (Graphics.boxWidth - width) / 2;
     const defaultY = (Graphics.boxHeight - height) / 2;
     const x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
