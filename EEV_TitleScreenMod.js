@@ -1139,6 +1139,169 @@
  * @default Выход
  */
 
+/*:ja
+ * @target MV MZ
+ *
+ * @plugindesc タイトル画面のカスタマイズ。
+ * [v0.0.0] [MITライセンス] [MV / MZ 対応]
+ *
+ * @author eevkyi および協力者
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * カスタムテキストやリンクは、該当するパラメータを
+ * ダブルクリックしてリストに新しい項目を追加することで設定できます。
+ * メニュー設定も同様に、パラメータをダブルクリックして調整できます。
+ *
+ * 使いやすさとテストのため、あらかじめ初期値が設定されています。
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0:
+ * - [画面] カスタム画像。
+ * - [画面] カスタムテキスト用の追加設定。
+ * - [メニュー] 追加設定およびカスタムオプション。
+ *
+ * 変更履歴:
+ * [v0.1.0]
+ * - [画面] サイズ、最大幅、行の高さ、配置、位置を
+ * カスタマイズ可能な複数のカスタムテキスト。
+ * - [メニュー] テキストをカスタマイズ可能な複数の外部リンク。
+ * - [メニュー] 幅（相対）、表示行数、配置、位置（相対）を
+ * カスタマイズ可能。
+ * - [メニュー] テキストをカスタマイズ可能な終了オプション
+ * （NW.jsのみ）。
+ *
+ * ----------------------------------------------------------------------------
+ * リリース:
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text カスタムテキスト
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text リンク
+ *
+ * @param TitleMenuSettings
+ * @text メニュー設定
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"終了"}
+ */
+
+/*~struct~CustomText:ja
+ * @param text
+ * @text テキスト
+ * @type string
+ * @desc 表示されるテキストです。
+ * @default テストテキスト
+ *
+ * @param fontSize
+ * @text フォントサイズ
+ * @type number
+ * @desc フォントのサイズです。
+ * @default 72
+ *
+ * @param maxWidth
+ * @text 最大幅
+ * @type number
+ * @desc テキストの最大幅です。
+ * @default 400
+ *
+ * @param lineHeight
+ * @text 行の高さ
+ * @type number
+ * @desc テキスト行の高さです。
+ * @default 96
+ *
+ * @param align
+ * @text 配置
+ * @type select
+ * @option 中央
+ * @value center
+ * @option 右
+ * @value right
+ * @option 左
+ * @value left
+ * @desc テキストの配置方法です。
+ * @default center
+ *
+ * @param x
+ * @text X座標
+ * @type number
+ * @desc テキスト左端のX座標です。
+ * @default 200
+ *
+ * @param y
+ * @text Y座標
+ * @type number
+ * @desc テキスト上端のY座標です。
+ * @default 200
+ */
+
+/*~struct~Link:ja
+ * @param label
+ * @text メニューテキスト
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:ja
+ * @param relativeWidth
+ * @text 相対幅
+ * @type number
+ * @desc ウィンドウ幅の割合に基づくメニューの相対幅です。
+ * @default 30
+ *
+ * @param visibleRows
+ * @text 表示行数
+ * @type number
+ * @desc メニューに表示される行数です。
+ * @default 10
+ *
+ * @param align
+ * @text 配置
+ * @type select
+ * @option 中央
+ * @value center
+ * @option 右
+ * @value right
+ * @option 左
+ * @value left
+ * @desc メニュー項目の配置方法です。
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text 相対Xオフセット
+ * @type number
+ * @desc ウィンドウ幅の割合に基づくメニューのX方向オフセットです。
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text 相対Yオフセット
+ * @type number
+ * @desc ウィンドウ高さの割合に基づくメニューのY方向オフセットです。
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text 終了を有効化
+ * @type boolean
+ * @desc 終了オプションを有効にします。
+ * @default true
+ *
+ * @param quitLabel
+ * @text 終了ラベル
+ * @type string
+ * @desc 終了オプションのテキストです。
+ * @default 終了
+ */
+
 (() => {
     'use strict';
 
