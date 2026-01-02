@@ -486,6 +486,169 @@
  * @default Sair
  */
 
+/*:it
+ * @target MV MZ
+ *
+ * @plugindesc Modifiche alla Schermata del Titolo.
+ * [v0.0.0] [Licenza MIT] [Compatibile con MV e MZ]
+ *
+ * @author eevkyi e collaboratori
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * Testi personalizzati e link possono essere aggiunti facendo doppio clic
+ * sul parametro corrispondente e aggiungendo un nuovo elemento alla lista.
+ * Le impostazioni del menu possono essere modificate facendo doppio clic
+ * sul relativo parametro.
+ *
+ * Sono stati inclusi valori predefiniti per facilitare l’uso e i test.
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0:
+ * - [Schermata] Immagini personalizzate.
+ * - [Schermata] Impostazioni aggiuntive per il testo personalizzato.
+ * - [Menu] Impostazioni aggiuntive e opzione personalizzata.
+ *
+ * REGISTRO DELLE MODIFICHE:
+ * [v0.1.0]
+ * - [Schermata] Testi personalizzati multipli con dimensione, larghezza massima,
+ * altezza della riga, allineamento e posizione personalizzabili.
+ * - [Menu] Link esterni multipli con testo personalizzabile.
+ * - [Menu] Larghezza personalizzabile (relativa), righe visibili, allineamento e
+ * posizione (relativa).
+ * - [Menu] Opzione di uscita con testo personalizzabile (solo NW.js).
+ *
+ * ----------------------------------------------------------------------------
+ * Rilasci:
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text Testo Personalizzato
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text Link
+ *
+ * @param TitleMenuSettings
+ * @text Impostazioni del Menu
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"Esci"}
+ */
+
+/*~struct~CustomText:it
+ * @param text
+ * @text Testo
+ * @type string
+ * @desc Il testo che verrà disegnato.
+ * @default Testo di Prova
+ *
+ * @param fontSize
+ * @text Dimensione Carattere
+ * @type number
+ * @desc La dimensione del carattere.
+ * @default 72
+ *
+ * @param maxWidth
+ * @text Larghezza Massima
+ * @type number
+ * @desc La larghezza massima consentita del testo.
+ * @default 400
+ *
+ * @param lineHeight
+ * @text Altezza Riga
+ * @type number
+ * @desc L’altezza della riga di testo.
+ * @default 96
+ *
+ * @param align
+ * @text Allineamento
+ * @type select
+ * @option Centro
+ * @value center
+ * @option Destra
+ * @value right
+ * @option Sinistra
+ * @value left
+ * @desc L’allineamento del testo.
+ * @default center
+ *
+ * @param x
+ * @text Coordinata X
+ * @type number
+ * @desc La coordinata X per il lato sinistro del testo.
+ * @default 200
+ *
+ * @param y
+ * @text Coordinata Y
+ * @type number
+ * @desc La coordinata Y per la parte superiore del testo.
+ * @default 200
+ */
+
+/*~struct~Link:it
+ * @param label
+ * @text Testo del Menu
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:it
+ * @param relativeWidth
+ * @text Larghezza Relativa
+ * @type number
+ * @desc La larghezza relativa del menu, basata sulla percentuale della larghezza della finestra.
+ * @default 30
+ *
+ * @param visibleRows
+ * @text Righe Visibili
+ * @type number
+ * @desc Il numero di righe visibili nel menu.
+ * @default 10
+ *
+ * @param align
+ * @text Allineamento
+ * @type select
+ * @option Centro
+ * @value center
+ * @option Destra
+ * @value right
+ * @option Sinistra
+ * @value left
+ * @desc L’allineamento degli elementi del menu.
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text Offset Relativo X
+ * @type number
+ * @desc L’offset relativo X del menu, basato sulla percentuale della larghezza della finestra.
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text Offset Relativo Y
+ * @type number
+ * @desc L’offset relativo Y del menu, basato sulla percentuale dell’altezza della finestra.
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text Uscita Abilitata
+ * @type boolean
+ * @desc Abilita l’opzione di uscita.
+ * @default true
+ *
+ * @param quitLabel
+ * @text Etichetta di Uscita
+ * @type string
+ * @desc Testo dell’opzione di uscita.
+ * @default Esci
+ */
+
 (() => {
     'use strict';
 
