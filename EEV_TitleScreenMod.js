@@ -9,14 +9,26 @@
  * @url https://ko-fi.com/eevkyi
  *
  * @help
- * No settings available in the current version.
+ * Custom text and links can be added by double-clicking the respective
+ * parameter and adding a new item to the list. Menu settings can also
+ * be adjusted by double-clicking their parameter.
+ *
+ * Predefined values have been included for ease of use and testing.
  *
  * ----------------------------------------------------------------------------
- * TODO v0.1.0:
- * - [Screen] Text with customizable size.
- * - [Menu] Quit option with customizable text.
- * - [Menu] External links with customizable text.
- * - [Menu] Customizable width and visible rows.
+ * TODO v0.2.0:
+ * - [Screen] Custom images.
+ * - [Screen] Extra settings for custom text.
+ * - [Menu] Extra settings and custom option.
+ *
+ * CHANGELOG:
+ * [v0.1.0]
+ * - [Screen] Multiple custom text with customizable size, max width,
+ * line height, align and position.
+ * - [Menu] Multiple external links with customizable text.
+ * - [Menu] Customizable width (relative), visible rows, align and
+ * position (relative).
+ * - [Menu] Quit option with customizable text (NW.js only).
  *
  * ----------------------------------------------------------------------------
  * Releases:
