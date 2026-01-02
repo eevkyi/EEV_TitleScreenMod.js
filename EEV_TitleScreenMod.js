@@ -1465,6 +1465,169 @@
  * @default 종료
  */
 
+/*:zh
+ * @target MV MZ
+ *
+ * @plugindesc 标题画面修改功能。
+ * [v0.0.0] [MIT 许可证] [兼容 MV 和 MZ]
+ *
+ * @author eevkyi 及贡献者
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * 可以通过双击相应的参数并在列表中添加新项目，
+ * 来添加自定义文本和链接。
+ * 菜单设置也可以通过双击其参数进行调整。
+ *
+ * 为了便于使用和测试，已预先包含默认值。
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0:
+ * - [画面] 自定义图片。
+ * - [画面] 自定义文本的额外设置。
+ * - [菜单] 额外设置和自定义选项。
+ *
+ * 更新日志:
+ * [v0.1.0]
+ * - [画面] 支持多个自定义文本，可设置大小、最大宽度、
+ * 行高、对齐方式和位置。
+ * - [菜单] 支持多个可自定义文本的外部链接。
+ * - [菜单] 可自定义宽度（相对值）、可见行数、对齐方式和
+ * 位置（相对值）。
+ * - [菜单] 支持可自定义文本的退出选项
+ * （仅限 NW.js）。
+ *
+ * ----------------------------------------------------------------------------
+ * 发布地址:
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text 自定义文本
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text 链接
+ *
+ * @param TitleMenuSettings
+ * @text 菜单设置
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"退出"}
+ */
+
+/*~struct~CustomText:zh
+ * @param text
+ * @text 文本
+ * @type string
+ * @desc 将要绘制的文本内容。
+ * @default 测试文本
+ *
+ * @param fontSize
+ * @text 字体大小
+ * @type number
+ * @desc 字体的大小。
+ * @default 72
+ *
+ * @param maxWidth
+ * @text 最大宽度
+ * @type number
+ * @desc 文本允许的最大宽度。
+ * @default 400
+ *
+ * @param lineHeight
+ * @text 行高
+ * @type number
+ * @desc 文本行的高度。
+ * @default 96
+ *
+ * @param align
+ * @text 对齐方式
+ * @type select
+ * @option 居中
+ * @value center
+ * @option 右对齐
+ * @value right
+ * @option 左对齐
+ * @value left
+ * @desc 文本的对齐方式。
+ * @default center
+ *
+ * @param x
+ * @text X 坐标
+ * @type number
+ * @desc 文本左侧的 X 坐标。
+ * @default 200
+ *
+ * @param y
+ * @text Y 坐标
+ * @type number
+ * @desc 文本顶部的 Y 坐标。
+ * @default 200
+ */
+
+/*~struct~Link:zh
+ * @param label
+ * @text 菜单文本
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:zh
+ * @param relativeWidth
+ * @text 相对宽度
+ * @type number
+ * @desc 基于窗口宽度百分比的菜单相对宽度。
+ * @default 30
+ *
+ * @param visibleRows
+ * @text 可见行数
+ * @type number
+ * @desc 菜单中可见的行数。
+ * @default 10
+ *
+ * @param align
+ * @text 对齐方式
+ * @type select
+ * @option 居中
+ * @value center
+ * @option 右对齐
+ * @value right
+ * @option 左对齐
+ * @value left
+ * @desc 菜单项的对齐方式。
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text 相对 X 偏移
+ * @type number
+ * @desc 基于窗口宽度百分比的菜单 X 轴偏移量。
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text 相对 Y 偏移
+ * @type number
+ * @desc 基于窗口高度百分比的菜单 Y 轴偏移量。
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text 启用退出
+ * @type boolean
+ * @desc 启用退出选项。
+ * @default true
+ *
+ * @param quitLabel
+ * @text 退出文本
+ * @type string
+ * @desc 退出选项显示的文本。
+ * @default 退出
+ */
+
 (() => {
     'use strict';
 
