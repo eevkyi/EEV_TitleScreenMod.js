@@ -323,6 +323,168 @@
  * @default Salir
  */
 
+/*:pt-BR
+ * @target MV MZ
+ *
+ * @plugindesc Modificações da Tela de Título.
+ * [v0.0.0] [Licença MIT] [Compatível com MV e MZ]
+ *
+ * @author eevkyi e colaboradores
+ *
+ * @url https://ko-fi.com/eevkyi
+ *
+ * @help
+ * Textos personalizados e links podem ser adicionados clicando duas vezes
+ * no parâmetro correspondente e adicionando um novo item à lista.
+ * As configurações do menu também podem ser ajustadas clicando duas vezes
+ * em seu parâmetro.
+ *
+ * Valores predefinidos foram incluídos para facilitar o uso e os testes.
+ *
+ * ----------------------------------------------------------------------------
+ * TODO v0.2.0:
+ * - [Tela] Imagens personalizadas.
+ * - [Tela] Configurações extras para texto personalizado.
+ * - [Menu] Configurações extras e opção personalizada.
+ *
+ * HISTÓRICO DE ALTERAÇÕES:
+ * [v0.1.0]
+ * - [Tela] Múltiplos textos personalizados com tamanho, largura máxima,
+ * altura da linha, alinhamento e posição configuráveis.
+ * - [Menu] Múltiplos links externos com texto configurável.
+ * - [Menu] Largura configurável (relativa), linhas visíveis, alinhamento e
+ * posição (relativa).
+ * - [Menu] Opção de sair com texto configurável (apenas NW.js).
+ *
+ * ----------------------------------------------------------------------------
+ * Lançamentos:
+ * - https://github.com/eevkyi/EEV_TitleScreenMod.js
+ *
+ * @param CustomTextList
+ * @type struct<CustomText>[]
+ * @text Texto Personalizado
+ *
+ * @param LinkList
+ * @type struct<Link>[]
+ * @text Links
+ *
+ * @param TitleMenuSettings
+ * @text Configurações do Menu
+ * @type struct<MenuSettings>
+ * @default {"relativeWidth":"30","visibleRows":"10","align":"center","relativeOffsetX":"0","relativeOffsetY":"0","quitEnabled":"true","quitLabel":"Sair"}
+ */
+
+/*~struct~CustomText:pt-BR
+ * @param text
+ * @text Texto
+ * @type string
+ * @desc O texto que será desenhado.
+ * @default Texto de Teste
+ *
+ * @param fontSize
+ * @text Tamanho da Fonte
+ * @type number
+ * @desc O tamanho da fonte.
+ * @default 72
+ *
+ * @param maxWidth
+ * @text Largura Máxima
+ * @type number
+ * @desc A largura máxima permitida do texto.
+ * @default 400
+ *
+ * @param lineHeight
+ * @text Altura da Linha
+ * @type number
+ * @desc A altura da linha do texto.
+ * @default 96
+ *
+ * @param align
+ * @text Alinhamento
+ * @type select
+ * @option Centro
+ * @value center
+ * @option Direita
+ * @value right
+ * @option Esquerda
+ * @value left
+ * @desc O alinhamento do texto.
+ * @default center
+ *
+ * @param x
+ * @text Coordenada X
+ * @type number
+ * @desc A coordenada X do lado esquerdo do texto.
+ * @default 200
+ *
+ * @param y
+ * @text Coordenada Y
+ * @type number
+ * @desc A coordenada Y do topo do texto.
+ * @default 200
+ */
+
+/*~struct~Link:pt-BR
+ * @param label
+ * @text Texto do Menu
+ * @type string
+ * @default Google
+ *
+ * @param url
+ * @text URL
+ * @type string
+ * @default https://www.google.com/
+ */
+
+/*~struct~MenuSettings:pt-BR
+ * @param relativeWidth
+ * @text Largura Relativa
+ * @type number
+ * @desc A largura relativa do menu, baseada na porcentagem da largura da janela.
+ * @default 30
+ *
+ * @param visibleRows
+ * @text Linhas Visíveis
+ * @type number
+ * @desc O número de linhas visíveis no menu.
+ * @default 10
+ *
+ * @param align
+ * @text Alinhamento
+ * @type select
+ * @option Centro
+ * @value center
+ * @option Direita
+ * @value right
+ * @option Esquerda
+ * @value left
+ * @desc O alinhamento dos itens do menu.
+ * @default center
+ *
+ * @param relativeOffsetX
+ * @text Deslocamento Relativo X
+ * @type number
+ * @desc O deslocamento relativo em X do menu, baseado na porcentagem da largura da janela.
+ * @default 0
+ *
+ * @param relativeOffsetY
+ * @text Deslocamento Relativo Y
+ * @type number
+ * @desc O deslocamento relativo em Y do menu, baseado na porcentagem da altura da janela.
+ * @default 0
+ *
+ * @param quitEnabled
+ * @text Sair Ativado
+ * @type boolean
+ * @desc Ativar a opção de sair.
+ * @default true
+ *
+ * @param quitLabel
+ * @text Rótulo de Sair
+ * @type string
+ * @desc Texto da opção sair.
+ * @default Sair
+ */
 
 (() => {
     'use strict';
