@@ -2,7 +2,7 @@
  * @target MV MZ
  *
  * @plugindesc Title Screen Modifications.
- * [v0.0.0] [MIT License] [Compatible with MV and MZ]
+ * [v0.1.0] [MIT License] [Compatible with MV and MZ]
  *
  * @author eevkyi and contributors
  *
@@ -164,7 +164,7 @@
  * @target MV MZ
  *
  * @plugindesc Modificaciones de la pantalla de título.
- * [v0.0.0] [Licencia MIT] [Compatible con MV y MZ]
+ * [v0.1.0] [Licencia MIT] [Compatible con MV y MZ]
  *
  * @author eevkyi y colaboradores
  *
@@ -327,7 +327,7 @@
  * @target MV MZ
  *
  * @plugindesc Modificações da Tela de Título.
- * [v0.0.0] [Licença MIT] [Compatível com MV e MZ]
+ * [v0.1.0] [Licença MIT] [Compatível com MV e MZ]
  *
  * @author eevkyi e colaboradores
  *
@@ -490,7 +490,7 @@
  * @target MV MZ
  *
  * @plugindesc Modifiche alla Schermata del Titolo.
- * [v0.0.0] [Licenza MIT] [Compatibile con MV e MZ]
+ * [v0.1.0] [Licenza MIT] [Compatibile con MV e MZ]
  *
  * @author eevkyi e collaboratori
  *
@@ -653,7 +653,7 @@
  * @target MV MZ
  *
  * @plugindesc Modifications de l’écran titre.
- * [v0.0.0] [Licence MIT] [Compatible avec MV et MZ]
+ * [v0.1.0] [Licence MIT] [Compatible avec MV et MZ]
  *
  * @author eevkyi et contributeurs
  *
@@ -816,7 +816,7 @@
  * @target MV MZ
  *
  * @plugindesc Änderungen am Titelbildschirm.
- * [v0.0.0] [MIT-Lizenz] [Kompatibel mit MV und MZ]
+ * [v0.1.0] [MIT-Lizenz] [Kompatibel mit MV und MZ]
  *
  * @author eevkyi und Mitwirkende
  *
@@ -980,7 +980,7 @@
  * @target MV MZ
  *
  * @plugindesc Изменения экрана заголовка.
- * [v0.0.0] [Лицензия MIT] [Совместимо с MV и MZ]
+ * [v0.1.0] [Лицензия MIT] [Совместимо с MV и MZ]
  *
  * @author eevkyi и участники
  *
@@ -1143,7 +1143,7 @@
  * @target MV MZ
  *
  * @plugindesc タイトル画面のカスタマイズ。
- * [v0.0.0] [MITライセンス] [MV / MZ 対応]
+ * [v0.1.0] [MITライセンス] [MV / MZ 対応]
  *
  * @author eevkyi および協力者
  *
@@ -1306,7 +1306,7 @@
  * @target MV MZ
  *
  * @plugindesc 타이틀 화면 수정 기능.
- * [v0.0.0] [MIT 라이선스] [MV 및 MZ 호환]
+ * [v0.1.0] [MIT 라이선스] [MV 및 MZ 호환]
  *
  * @author eevkyi 및 기여자
  *
@@ -1469,7 +1469,7 @@
  * @target MV MZ
  *
  * @plugindesc 标题画面修改功能。
- * [v0.0.0] [MIT 许可证] [兼容 MV 和 MZ]
+ * [v0.1.0] [MIT 许可证] [兼容 MV 和 MZ]
  *
  * @author eevkyi 及贡献者
  *

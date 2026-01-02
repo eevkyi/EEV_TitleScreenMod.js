@@ -1,6 +1,6 @@
 <div align="center">
 <h1>EEV_TitleScreenMod.js</h1>
-<img src="https://img.shields.io/badge/v0.0.0-Compatible%20with%20RPG%20Maker%20MV%20and%20MZ-8A2BE2" alt="v0.0.0"/><br>
+<img src="https://img.shields.io/badge/v0.1.0-Compatible%20with%20RPG%20Maker%20MV%20and%20MZ-8A2BE2" alt="v0.1.0"/><br>
 <img src="https://img.shields.io/badge/License-MIT-blue" alt="License MIT"/><br><br>
 Title Screen Modifications.
 <h2 align="center">Features</h2>
