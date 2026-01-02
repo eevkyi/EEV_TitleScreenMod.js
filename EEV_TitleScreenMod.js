@@ -148,120 +148,125 @@
  * @default Quit
  */
 
-const EEV_Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
-const EEV_Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
-const EEV_Scene_Title_create = Scene_Title.prototype.create;
-const EEV_Plugin_Parameters = PluginManager.parameters("EEV_TitleScreenMod");
+(() => {
+    'use strict';
 
-var EEV = EEV || {};
-EEV.CustomText = JSON.parse(EEV_Plugin_Parameters.CustomTextList || "[]");
-EEV.Links = JSON.parse(EEV_Plugin_Parameters.LinkList || "[]");
-EEV.MenuSettings = JSON.parse(EEV_Plugin_Parameters.TitleMenuSettings || "{}");
+    const EEV_Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
+    const EEV_Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
+    const EEV_Scene_Title_create = Scene_Title.prototype.create;
+    const EEV_Plugin_Parameters = PluginManager.parameters("EEV_TitleScreenMod");
+
+    var EEV = EEV || {};
+    EEV.CustomText = JSON.parse(EEV_Plugin_Parameters.CustomTextList || "[]");
+    EEV.Links = JSON.parse(EEV_Plugin_Parameters.LinkList || "[]");
+    EEV.MenuSettings = JSON.parse(EEV_Plugin_Parameters.TitleMenuSettings || "{}");
 
 
-Window_TitleCommand.prototype.makeCommandList = function() {
-    EEV_Window_TitleCommand_makeCommandList.call(this);
+    Window_TitleCommand.prototype.makeCommandList = function() {
+        EEV_Window_TitleCommand_makeCommandList.call(this);
 
-    EEV.Links.forEach((item, index) => {
-        const attributes = JSON.parse(item);
+        EEV.Links.forEach((item, index) => {
+            const attributes = JSON.parse(item);
 
-        this.addCommand(attributes.label, `link_${index}`);
-    });
-
-    if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
-        this.addCommand(`${EEV.MenuSettings.quitLabel}`, "quitGame");
-    }
-};
-
-Window_TitleCommand.prototype.itemTextAlign = function() {
-    return `${EEV.MenuSettings.align}`;
-};
-
-Scene_Title.prototype.createCommandWindow = function() {
-    EEV_Scene_Title_createCommandWindow.call(this);
-
-    EEV.Links.forEach((item, index) => {
-        const { url } = JSON.parse(item);
-
-        this._commandWindow.setHandler(`link_${index}`, () => {
-            const openLink = () => {
-                if (Utils.isNwjs()) {
-                    nw.Shell.openExternal(url);
-
-                } else {
-                    window.open(url, "_blank");
-                }
-            };
-
-            setTimeout(openLink, 100);
-            this._commandWindow.activate();
+            this.addCommand(attributes.label, `link_${index}`);
         });
-    });
+
+        if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
+            this.addCommand(`${EEV.MenuSettings.quitLabel}`, "quitGame");
+        }
+    };
+
+    Window_TitleCommand.prototype.itemTextAlign = function() {
+        return `${EEV.MenuSettings.align}`;
+    };
+
+    Scene_Title.prototype.createCommandWindow = function() {
+        EEV_Scene_Title_createCommandWindow.call(this);
+
+        EEV.Links.forEach((item, index) => {
+            const { url } = JSON.parse(item);
+
+            this._commandWindow.setHandler(`link_${index}`, () => {
+                const openLink = () => {
+                    if (Utils.isNwjs()) {
+                        nw.Shell.openExternal(url);
+
+                    } else {
+                        window.open(url, "_blank");
+                    }
+                };
+
+                setTimeout(openLink, 100);
+                this._commandWindow.activate();
+            });
+        });
 
 
-    if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
-        this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
-    }
+        if (Utils.isNwjs() && EEV.MenuSettings.quitEnabled === "true") {
+            this._commandWindow.setHandler("quitGame", nw.App.closeAllWindows);
+        }
 
-    // Needed for compatibility.
-    if (Utils.RPGMAKER_NAME === "MV") {
+        // Needed for compatibility.
+        if (Utils.RPGMAKER_NAME === "MV") {
+            const relativeWidth = EEV.MenuSettings.relativeWidth ?? 30;
+            this._commandWindow.width = Graphics.boxWidth * relativeWidth / 100;
+            const visibleRows = EEV.MenuSettings.visibleRows ?? 10;
+            this._commandWindow.height = this._commandWindow.fittingHeight(Math.min(this._commandWindow.maxItems(), visibleRows));
+            const relativeOffsetX = EEV.MenuSettings.relativeOffsetX ?? 0;
+            const relativeOffsetY = EEV.MenuSettings.relativeOffsetY ?? 0;
+            const defaultX = (Graphics.boxWidth - this._commandWindow.width) / 2;
+            const defaultY = (Graphics.boxHeight - this._commandWindow.height) / 2;
+            this._commandWindow.x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
+            this._commandWindow.y = defaultY + (Graphics.boxHeight * relativeOffsetY / 100);
+
+            this._commandWindow.refresh();
+            this._commandWindow.updateCursor();
+        }
+    };
+
+    Scene_Title.prototype.commandWindowRect = function() {
         const relativeWidth = EEV.MenuSettings.relativeWidth ?? 30;
-        this._commandWindow.width = Graphics.boxWidth * relativeWidth / 100;
+        const width = Graphics.boxWidth * relativeWidth / 100;
+
+        // Hack to remove empty spaces.
+        const menu = new Window_TitleCommand(new Rectangle(0, 0, width, 1));
         const visibleRows = EEV.MenuSettings.visibleRows ?? 10;
-        this._commandWindow.height = this._commandWindow.fittingHeight(Math.min(this._commandWindow.maxItems(), visibleRows));
+        const rows = Math.min(menu.maxItems(), visibleRows);
+        const height = this.calcWindowHeight(rows, true);
+
         const relativeOffsetX = EEV.MenuSettings.relativeOffsetX ?? 0;
         const relativeOffsetY = EEV.MenuSettings.relativeOffsetY ?? 0;
-        const defaultX = (Graphics.boxWidth - this._commandWindow.width) / 2;
-        const defaultY = (Graphics.boxHeight - this._commandWindow.height) / 2;
-        this._commandWindow.x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
-        this._commandWindow.y = defaultY + (Graphics.boxHeight * relativeOffsetY / 100);
+        const defaultX = (Graphics.boxWidth - width) / 2;
+        const defaultY = (Graphics.boxHeight - height) / 2;
+        const x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
+        const y = defaultY + (Graphics.boxHeight * relativeOffsetY / 100);
 
-        this._commandWindow.refresh();
-        this._commandWindow.updateCursor();
-    }
-};
+        return new Rectangle(x, y, width, height);
+    };
 
-Scene_Title.prototype.commandWindowRect = function() {
-    const relativeWidth = EEV.MenuSettings.relativeWidth ?? 30;
-    const width = Graphics.boxWidth * relativeWidth / 100;
+    Scene_Title.prototype.create = function() {
+        EEV_Scene_Title_create.call(this);
 
-    // Hack to remove empty spaces.
-    const menu = new Window_TitleCommand(new Rectangle(0, 0, width, 1));
-    const visibleRows = EEV.MenuSettings.visibleRows ?? 10;
-    const rows = Math.min(menu.maxItems(), visibleRows);
-    const height = this.calcWindowHeight(rows, true);
+        EEV.CustomText.forEach(item => {
+            const settings = JSON.parse(item);
 
-    const relativeOffsetX = EEV.MenuSettings.relativeOffsetX ?? 0;
-    const relativeOffsetY = EEV.MenuSettings.relativeOffsetY ?? 0;
-    const defaultX = (Graphics.boxWidth - width) / 2;
-    const defaultY = (Graphics.boxHeight - height) / 2;
-    const x = defaultX + (Graphics.boxWidth * relativeOffsetX / 100);
-    const y = defaultY + (Graphics.boxHeight * relativeOffsetY / 100);
+            const text = settings.text ?? "Test Text";
+            const fontSize = settings.fontSize ?? 72;
+            const maxWidth = settings.maxWidth ?? 400;
+            const lineHeight = settings.lineHeight ?? 96;
+            const align = settings.align ?? "center";
+            const x = settings.x ?? 200;
+            const y = settings.y ?? 200;
 
-    return new Rectangle(x, y, width, height);
-};
+            const bitmap = new Bitmap(maxWidth, lineHeight);
+            const sprite = new Sprite(bitmap);
+            sprite.bitmap.fontSize = fontSize;
+            sprite.bitmap.drawText(text, 0, 0, maxWidth, lineHeight, align);
+            sprite.x = x;
+            sprite.y = y;
 
-Scene_Title.prototype.create = function() {
-    EEV_Scene_Title_create.call(this);
+            this.addChild(sprite);
+        });
+    };
 
-    EEV.CustomText.forEach(item => {
-        const settings = JSON.parse(item);
-
-        const text = settings.text ?? "Test Text";
-        const fontSize = settings.fontSize ?? 72;
-        const maxWidth = settings.maxWidth ?? 400;
-        const lineHeight = settings.lineHeight ?? 96;
-        const align = settings.align ?? "center";
-        const x = settings.x ?? 200;
-        const y = settings.y ?? 200;
-
-        const bitmap = new Bitmap(maxWidth, lineHeight);
-        const sprite = new Sprite(bitmap);
-        sprite.bitmap.fontSize = fontSize;
-        sprite.bitmap.drawText(text, 0, 0, maxWidth, lineHeight, align);
-        sprite.x = x;
-        sprite.y = y;
-
-        this.addChild(sprite);
-    });
-};
+})();
